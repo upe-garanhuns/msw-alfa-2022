@@ -263,3 +263,10 @@ We're hiring developers, support people, and product managers all the time. Plea
 - [Email Newsletter](https://rocket.chat/newsletter)
 
 Any other questions, reach out to us at [our website](https://rocket.chat/contact) or you can email us directly at [contact@rocket.chat](mailto:contact@rocket.chat). We’d be happy to help!
+
+
+## Learned Lessons
+
+At the fallowing links we are registering the hardships and learned lessons that we get through between each sprint
+- <a href="https://docs.google.com/document/d/1dlqWx0kL4sf4LbbGkvWTCrWcaFPtCRd0aTyHsc6aYI4/edit">Learned lessons - 1</a>
+- <a href="https://docs.google.com/document/d/1Xsyds3y404FCFp87n_rUkuLbPpQtJ325_fyO1ght6T0/edit#">Learned lessons - 2</a>

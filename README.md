@@ -270,3 +270,4 @@ Any other questions, reach out to us at [our website](https://rocket.chat/contac
 At the fallowing links we are registering the hardships and learned lessons that we get through between each sprint
 - <a href="https://docs.google.com/document/d/1dlqWx0kL4sf4LbbGkvWTCrWcaFPtCRd0aTyHsc6aYI4/edit">Learned lessons - 1</a>
 - <a href="https://docs.google.com/document/d/1Xsyds3y404FCFp87n_rUkuLbPpQtJ325_fyO1ght6T0/edit#">Learned lessons - 2</a>
+- <a href="https://docs.google.com/document/d/1VuQGRQSef_Dj2ws6GGPV5_GS4TMQFLy1k87sd50_YEU/edit#">Learned lessons - 3</a>

@@ -163,7 +163,12 @@ export interface IMessage extends IRocketChatRecord {
 	attachments?: MessageAttachment[];
 
 	reactions?: {
-		[key: string]: { names?: (string | undefined)[]; usernames: string[]; federationReactionEventIds?: Record<string, string> };
+		[key: string]: {
+			names?: (string | undefined)[];
+			usernames: string[];
+			federationReactionEventIds?: Record<string, string>;
+			userIdsAndNames: Record<string, string>;
+		};
 	};
 
 	private?: boolean;
@@ -244,6 +249,7 @@ export interface IMessageReactionsNormalized extends IMessage {
 		[key: string]: {
 			usernames: Required<IUser['_id']>[];
 			names: Required<IUser>['name'][];
+			userIdsAndNames: Record<string, string>;
 		};
 	};
 }

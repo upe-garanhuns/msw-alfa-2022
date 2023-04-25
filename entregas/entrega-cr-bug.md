@@ -1,4 +1,4 @@
-[BUG] A simple user can create a call in a read-only channel
+# [BUG] A simple user can create a call in a read-only channel
 ## CR Original:
 ![image](https://user-images.githubusercontent.com/55411281/224194465-25b570ca-f86d-486f-80e0-98fe412b8590.png)
 ![image](https://user-images.githubusercontent.com/55411281/224194535-f801fc55-1585-4114-84f7-4eeb1c699b7f.png)
@@ -40,8 +40,39 @@ Por existir a possibilidade de duas interpretações a solução foi dividida em
 - Apontam os riscos e as ações de mitigação:
   - Possibilidade de a função de verificar permissões não ter comportamento esperado, não sendo possível a realização em tempo hábil da solução de nível 2. Para mitigar tal risco a solução foi separada em dois níveis.
 
+### Implementação da mudança 
 
-[BUG] Same user can react with the same emoji multiple times
+- Descrição
+O Bug identificado por usuários da comunidade esta relacionado com uma ambiguidade no canal de somente escrita. Ao criar esse tipo de canal, o usuário deveria ser capaz apenas de escrever e receber mensagens, coisa que não acontece, devido a permanência da possibilidade de executar ligações.
+
+- Link : CR Original
+
+- Horas estimadas x horas reais
+  Estimado: 30m
+  Real: 30m
+
+Para esta CR após uma longa analise foi definido um tempo estimado de 30 minutos e esse tempo se cumpriu, sendo também suficiente para a realização dos testes.
+
+- Artefatos para alteração estimados x Artefatos alterados
+  estimado: tabBar.txs
+  alterado: tabBar.txs
+
+Para esta CR foi identificado um único arquivo para modificação e esta estimativa se mostrou verdadeira, após alguns testes foi identificado que o sistema mostrou o comportamento esperado apenas mudando neste único local.
+
+- Sistema antes:
+![image](https://user-images.githubusercontent.com/71401796/234149555-d9925e79-0a32-45b4-abc3-3507d15b6dcd.png)
+
+- Sistema após a atualização:
+![image](https://user-images.githubusercontent.com/71401796/234150466-409a1b5e-f1ba-4e10-9ec4-52af206ce6c0.png)
+
+- Passos para reproduzir e validar
+  Criar dois canais: um de apenas leitura e outro normal
+  Verificar se no canal normal esta presente a opção de chamada
+  Verificar se no canal de apenas leitura não esta presente a opção de chamada
+
+
+
+# [BUG] Same user can react with the same emoji multiple times
 
 ## CR Original:
 ![image](https://user-images.githubusercontent.com/55411281/224191441-73d0e182-26f0-4c64-b57a-a60d1531638c.png)

@@ -24,7 +24,7 @@ const Reactions = ({ message }: ReactionsProps): ReactElement => {
 				Object.entries(message.reactions).map(([name, reactions]) => (
 					<Reaction
 						key={name}
-						counter={reactions.usernames.length}
+						counter={reactions.userIdsAndNames?.length}
 						hasReacted={hasReacted}
 						name={name}
 						names={filterReactions(name)}

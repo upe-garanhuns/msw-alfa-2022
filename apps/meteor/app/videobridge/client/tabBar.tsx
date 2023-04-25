@@ -85,7 +85,7 @@ addAction('start-call', ({ room }) => {
 
 	return useMemo(
 		() =>
-			enableOption && !ownUser
+			enableOption && !ownUser && !room.ro
 				? {
 						groups,
 						id: 'start-call',

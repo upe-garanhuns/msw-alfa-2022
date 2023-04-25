@@ -55,9 +55,11 @@ Meteor.methods({
 			if (!message.reactions[reaction]) {
 				message.reactions[reaction] = {
 					usernames: [],
+					userIdsAndNames: [],
 				};
 			}
 			message.reactions[reaction].usernames.push(user.username);
+			message.reactions[reaction].userIdsAndNames.push({ id: user._id, username: user.username });
 
 			Messages.update({ _id: messageId }, { $set: { reactions: message.reactions } });
 			callbacks.run('setReaction', messageId, reaction);

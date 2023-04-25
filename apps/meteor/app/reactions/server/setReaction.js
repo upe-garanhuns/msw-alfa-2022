@@ -11,9 +11,10 @@ import { isTheLastMessage, msgStream } from '../../lib/server';
 import { canAccessRoom, hasPermission } from '../../authorization/server';
 import { AppEvents, Apps } from '../../apps/server/orchestrator';
 
-const removeUserReaction = (message, reaction, username) => {
-	message.reactions[reaction].usernames.splice(message.reactions[reaction].usernames.indexOf(username), 1);
-	if (message.reactions[reaction].usernames.length === 0) {
+const removeUserReaction = (message, reaction, userId) => {
+	const reactionsList = message.reactions[reaction].userIdsAndNames.filter((userIdAndName) => userIdAndName.id !== userId);
+	message.reactions[reaction].userIdsAndNames = reactionsList;
+	if (reactionsList.length === 0) {
 		delete message.reactions[reaction];
 	}
 	return message;
@@ -44,7 +45,7 @@ async function setReaction(room, user, message, reaction, shouldReact) {
 	const userAlreadyReacted =
 		Boolean(message.reactions) &&
 		Boolean(message.reactions[reaction]) &&
-		message.reactions[reaction].usernames.indexOf(user.username) !== -1;
+		message.reactions[reaction].userIdsAndNames.filter((idAndName) => idAndName.id === user._id).length !== 0;
 	// When shouldReact was not informed, toggle the reaction.
 	if (shouldReact === undefined) {
 		shouldReact = !userAlreadyReacted;
@@ -58,7 +59,7 @@ async function setReaction(room, user, message, reaction, shouldReact) {
 
 	if (userAlreadyReacted) {
 		const oldMessage = JSON.parse(JSON.stringify(message));
-		removeUserReaction(message, reaction, user.username);
+		removeUserReaction(message, reaction, user._id);
 		if (_.isEmpty(message.reactions)) {
 			delete message.reactions;
 			if (isTheLastMessage(room, message)) {
@@ -82,9 +83,11 @@ async function setReaction(room, user, message, reaction, shouldReact) {
 		if (!message.reactions[reaction]) {
 			message.reactions[reaction] = {
 				usernames: [],
+				userIdsAndNames: [],
 			};
 		}
 		message.reactions[reaction].usernames.push(user.username);
+		message.reactions[reaction].userIdsAndNames.push({ id: user._id, username: user.username });
 		Messages.setReactions(message._id, message.reactions);
 		if (isTheLastMessage(room, message)) {
 			Rooms.setReactionsInLastMessage(room._id, message);

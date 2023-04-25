@@ -1,3 +1,7 @@
+#Fork project presentation
+Project selected and forked in order to be used as target of study in the discipline Software maintenance of the course Software engineering.
+This project was selected because its open issues, good documentation, visual functionalities and tecnology used.
+
 <img src="https://github.com/RocketChat/Rocket.Chat.Artwork/raw/master/Logos/2020/png/logo-horizontal-red.png" data-canonical-src="https://github.com/RocketChat/Rocket.Chat.Artwork/raw/master/Logos/2020/png/logo-horizontal-red.png" width="500" />
 
 <h1 align="center">
@@ -23,8 +27,34 @@ https://cloud.rocket.chat/trial
 
 ## Local development
 
-### Windowns 10
-Microsoft released Windows Subsystem for Linux 2 (WSL2) in June of 2020. Before this time, the development of large and complex NodeJS-based servers/full-stack applications such as Rocket.Chat on Windows was close to impossible.
+### Prerequisites
+
+You can follow these instructions to setup a dev environment:
+
+- Install **Node 14.x (LTS)** either [manually](https://nodejs.org/dist/latest-v14.x/) or using a tool like [nvm](https://github.com/creationix/nvm) (recommended)
+- Install **Meteor**: https://www.meteor.com/developers/install
+- Install **yarn**: https://yarnpkg.com/getting-started/install
+- Clone this repo: `git clone https://github.com/RocketChat/Rocket.Chat.git`
+- Run `yarn` to install dependencies
+
+### Starting Rocket.Chat
+
+```
+yarn dsv
+```
+
+After initialized, you can access the server at http://localhost:3000
+
+### Starting Rocket.Chat in microservices mode
+
+```
+yarn turbo run ms
+```
+
+After initialized, you can access the server at http://localhost:4000
+
+### Windows 10
+In order to develop in Windows 10, it is necessary to use WSL2. Microsoft released Windows Subsystem for Linux 2 (WSL2) in June of 2020. Before this time, the development of large and complex NodeJS-based servers/full-stack applications such as Rocket.Chat on Windows was close to impossible.
 
 WSL 2 is a complete architectural overhaul of Linux on Windows, installing a full genuine Linux kernel (built by Microsoft) alongside the classic Windows kernel. The Linux kernel and Windows kernel can now share system resources, such as memory and CPU, at a granularity not previously possible. It also includes major performance optimization on cross-subsystems file sharing, boot, and other developer-relevant areas.
 
@@ -48,6 +78,9 @@ Building Rocket.Chat code requires a minimum of 8 GB of RAM memory on the Linux 
 - 12 GB of RAM memory (16+ GB highly recommended)
 - 4 or more cores on CPU (at least 3 GHz boosted, 4.2 GHz or higher recommended)
 - 80 GB of available fast SSD storage ( PCIe 4.0 NVMe SSD recommended)
+
+
+
 
 ### Setting up a Development Environment
 
@@ -132,32 +165,53 @@ When you make changes to Rocket.Chat the server will automatically rebuild.
 Sometimes changes can shut down the server, if that happens just run yarn dev again.
 
 
-### Prerequisites
+## Repository Structure
 
-You can follow these instructions to setup a dev environment:
+This section is intended to familiarize you with the Rocket.Chat repository structure.
 
-- Install **Node 14.x (LTS)** either [manually](https://nodejs.org/dist/latest-v14.x/) or using a tool like [nvm](https://github.com/creationix/nvm) (recommended)
-- Install **Meteor**: https://www.meteor.com/developers/install
-- Install **yarn**: https://yarnpkg.com/getting-started/install
-- Clone this repo: `git clone https://github.com/RocketChat/Rocket.Chat.git`
-- Run `yarn` to install dependencies
-
-### Starting Rocket.Chat
+For more details, visit <a href="https://developer.rocket.chat/rocket.chat/repository-structure">documentation<a>
 
 ```
-yarn dsv
+Rocket.Chat
+├── README.md
+├── _templates/
+├── apps/
+│   └── meteor/
+│       ├── app/            # Features of Rocket.Chat
+│       ├── client/         # General frontend only related code 
+│       ├── definition/
+│       ├── ee/             # Enterprise related code
+│       ├── imports/
+│       ├── install.sh*
+│       ├── lib/            # Helper functions, classes, and methods
+│       ├── package.json
+│       ├── packages/       # Meteor packages customized in use
+│       ├── private/        # Private files and assets only available within the project
+│       ├── public/         # Publicly available files served directly from the project root
+│       ├── server/         # Server side only code
+│       ├── tests/          # Tests
+├── ee/
+│   └── apps/
+├── package.json
+├── packages/               # Houses sharable code that can be used by different projects
+│   ├── agenda/
+│   ├── api-client/
+│   ├── cas-validate/
+│   ├── core-typings/       # Type definitions used for core Rocket.Chat
+│   │   ├── src/
+│   ├── eslint-config/      # Config files and rules for code and unit tests
+│   │   ├── best-practices/
+│   │   ├── errors/
+│   │   ├── ...
+│   │   └── variables/
+│   ├── livechat/
+│   ├── model-typings/
+│   ├── models/
+│   ├── rest-typings/        # Signatures of endpoints
+│   ├── ui-client/
+│   ├── ui-contexts/
+│   └── ui-video-conf/
 ```
-
-After initialized, you can access the server at http://localhost:3000
-
-### Starting Rocket.Chat in microservices mode
-
-```
-yarn turbo run ms
-```
-
-After initialized, you can access the server at http://localhost:4000
-
 ## Installation
 
 Please see the [requirements documentation](https://docs.rocket.chat/installing-and-updating/minimum-requirements-for-using-rocket.chat) for system requirements and more information about supported operating systems.
@@ -209,3 +263,11 @@ We're hiring developers, support people, and product managers all the time. Plea
 - [Email Newsletter](https://rocket.chat/newsletter)
 
 Any other questions, reach out to us at [our website](https://rocket.chat/contact) or you can email us directly at [contact@rocket.chat](mailto:contact@rocket.chat). We’d be happy to help!
+
+
+## Learned Lessons
+
+At the fallowing links we are registering the hardships and learned lessons that we get through between each sprint
+- <a href="https://docs.google.com/document/d/1dlqWx0kL4sf4LbbGkvWTCrWcaFPtCRd0aTyHsc6aYI4/edit">Learned lessons - 1</a>
+- <a href="https://docs.google.com/document/d/1Xsyds3y404FCFp87n_rUkuLbPpQtJ325_fyO1ght6T0/edit#">Learned lessons - 2</a>
+- <a href="https://docs.google.com/document/d/1VuQGRQSef_Dj2ws6GGPV5_GS4TMQFLy1k87sd50_YEU/edit#">Learned lessons - 3</a>

@@ -53,29 +53,29 @@ const MessageListProvider: VFC<MessageListProviderProps> = ({ children }) => {
 				const { reactions } = message;
 				return !showRealName
 					? (reaction: string): string[] =>
-							reactions?.[reaction]?.usernames.filter((user) => user !== username).map((username) => `@${username}`) || []
+						reactions?.[reaction]?.userIdsAndNames?.filter((user) => user.id !== uid).map((user) => `@${user.username}`) || []
 					: (reaction: string): string[] => {
-							if (!reactions || !reactions[reaction]) {
-								return [];
-							}
-							if (!isMessageReactionsNormalized(message)) {
-								return message.reactions?.[reaction]?.usernames.filter((user) => user !== username).map((username) => `@${username}`) || [];
-							}
-							if (!username) {
-								return message.reactions[reaction].names;
-							}
-							const index = message.reactions[reaction].usernames.indexOf(username);
-							if (index === -1) {
-								return message.reactions[reaction].names;
-							}
+						if (!reactions || !reactions[reaction]) {
+							return [];
+						}
+						if (!isMessageReactionsNormalized(message)) {
+							return reactions?.[reaction]?.userIdsAndNames?.filter((user) => user.id !== uid).map((user) => `@${user.username}`) || []
+						}
+						if (!username) {
+							return message.reactions[reaction].names;
+						}
+						const index = message.reactions[reaction].usernames.indexOf(username);
+						if (index === -1) {
+							return message.reactions[reaction].names;
+						}
 
-							return message.reactions[reaction].names.splice(index, 1);
-					  };
+						return message.reactions[reaction].names.splice(index, 1);
+					};
 			},
 			useUserHasReacted: username
 				? (message) =>
-						(reaction): boolean =>
-							Boolean(message.reactions?.[reaction].usernames.includes(username))
+					(reaction): boolean =>
+						Boolean(message.reactions?.[reaction].userIdsAndNames?.filter((userIdAndName) => userIdAndName.id === uid).length > 0)
 				: () => (): boolean => false,
 			useShowFollowing: uid
 				? ({ message }): boolean => Boolean(message.replies && message.replies.indexOf(uid) > -1 && !isThreadMainMessage(message))
@@ -87,8 +87,8 @@ const MessageListProvider: VFC<MessageListProviderProps> = ({ children }) => {
 				: (): boolean => false,
 			useMessageDateFormatter:
 				() =>
-				(date: Date): string =>
-					date.toLocaleString(),
+					(date: Date): string =>
+						date.toLocaleString(),
 			showRoles,
 			showRealName,
 			showUsername,
@@ -108,13 +108,13 @@ const MessageListProvider: VFC<MessageListProviderProps> = ({ children }) => {
 
 			useOpenEmojiPicker: uid
 				? (message) =>
-						(e): void => {
-							e.nativeEvent.stopImmediatePropagation();
-							EmojiPicker.open(
-								e.currentTarget,
-								(emoji: string) => reactToMessage({ messageId: message._id, reaction: emoji }) as unknown as void,
-							);
-						}
+					(e): void => {
+						e.nativeEvent.stopImmediatePropagation();
+						EmojiPicker.open(
+							e.currentTarget,
+							(emoji: string) => reactToMessage({ messageId: message._id, reaction: emoji }) as unknown as void,
+						);
+					}
 				: () => (): void => undefined,
 		}),
 		[

@@ -34,6 +34,7 @@ Link: https://github.com/RocketChat/Rocket.Chat/issues/8505
   - Analise inicial estar errada, colocando uma complexidade muito baixa, para mitigar, na execução da solução será realizado uma modificação pontual para validar a analise
   - Não possuir um sistema IOS para testar os comandos para mac, para mitigar este problema entraremos em contato com usuários de mac para poder realizar os testes do sistema.
     
+    
 # CR: Detect OS and provide the keyboard shortcut's description accordingly
 
 
